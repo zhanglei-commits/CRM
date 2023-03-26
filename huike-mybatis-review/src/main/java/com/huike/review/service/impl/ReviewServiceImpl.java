@@ -7,9 +7,11 @@ import com.huike.review.pojo.Review;
 import com.huike.review.service.ReviewService;
 import com.huike.review.mapper.MybatisReviewMapper;
 import com.huike.review.vo.MybatisReviewVO;
+import com.huike.review.vo.ReviewDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -23,15 +25,33 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     private MybatisReviewMapper reviewMapper;
 
-    /**=========================================================保存数据的方法=============================================*/
+    @Override
+    public List<MybatisReviewVO> getDataPage(Integer pageNUm, Integer pageSize) {
+        List<MybatisReviewVO> dataPage = reviewMapper.getDataPage(pageNUm, pageSize);
+        return dataPage;
+    }
+
+    @Override
+    public ReviewDto getById(Long id) {
+        ReviewDto reviewDTO =reviewMapper.getById(id);
+        return reviewDTO;
+    }
+
+    @Override
+    public void saveData(Review review) {
+        reviewMapper.saveData(review);
+    }
 
 
-    /**=========================================================删除数据=============================================*/
+    @Override
+    public void update(Review review) {
+        review.setUpdateTime(new Date());
+        reviewMapper.update(review);
+    }
 
-
-    /**=========================================================修改数据=============================================*/
-
-
-    /**=========================================================查询数据的方法=============================================*/
+    @Override
+    public void remove(Long id) {
+        reviewMapper.remove(id);
+    }
 
 }

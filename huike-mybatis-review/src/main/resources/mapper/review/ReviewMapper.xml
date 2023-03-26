@@ -4,5 +4,36 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huike.review.mapper.MybatisReviewMapper">
 
+    <select id="getDataPage" resultType="com.huike.review.vo.MybatisReviewVO">
+        select * from mybatis_review
+        limit #{pageNum},${pagesize}
+    </select>
+
+    <select id="getById" resultType="com.huike.review.vo.ReviewDto">
+        select * from mybatis_review where id  = #{id}
+    </select>
+
+    <insert id="saveData" parameterType="com.huike.review.pojo.Review">
+        insert into mybatis_review
+        <where>
+            <if test="name != null">name=#{name}</if>
+            <if test="age != null">age=#{age}</if>
+            <if test="sex != null">sex=#{sex}</if>
+            <if test="createBy != null">create_by=#{createBy}</if>
+            <if test="createTime != null">create_time=#{createTime}</if>
+            <if test="updateBy != null">update_user=#{updateBy}</if>
+            <if test="updateTime != null">update_time=#{updateTime}</if>
+        </where>
+    </insert>
+
+    <update id="update">
+        update mybatis_review set name = #{name},age = #{age},sex = #{sex}
+        where id = #{id}
+    </update>
+
+    <delete id="remove">
+        delete from mybatis_review
+        where id = #{id}
+    </delete>
 
 </mapper>

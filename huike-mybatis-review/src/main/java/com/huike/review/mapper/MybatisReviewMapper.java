@@ -2,23 +2,28 @@ package com.huike.review.mapper;
 
 import com.huike.review.pojo.Review;
 import com.huike.review.vo.MybatisReviewVO;
+import com.huike.review.vo.ReviewDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Mybatis复习的Mapper层
  */
 public interface MybatisReviewMapper {
+    List<MybatisReviewVO> getDataPage(@Param("pageNum") Integer pageNum, @Param("pageSize") Integer pageSize);
 
+    ReviewDto getById(Long id);
 
-    /**======================================================新增======================================================**/
+    void saveData(Review review);
+
+    void update(Review review);
+
+    void remove(Long id);
 
     /**======================================================删除======================================================**/
 
-    /**======================================================修改======================================================**/
 
-    /**======================================================简单查询===================================================**/
+    /**======================================================修改======================================================**/
 
 }
